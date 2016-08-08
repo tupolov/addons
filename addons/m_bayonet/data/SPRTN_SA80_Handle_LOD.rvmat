@@ -1,0 +1,32 @@
+ambient[]={1,1,1,1};
+diffuse[]={1,1,1,1};
+forcedDiffuse[]={0,0,0,0};
+emmisive[]={0,0,0,1};
+specular[]={0,0,0,1};
+specularPower=10;
+PixelShaderID="NormalMapDiffuse";
+VertexShaderID="NormalMapDiffuse";
+class Stage1
+{
+	texture="x\tup\addons\m_bayonet\data\SPRTN_SA80_bayonet_LOD0_4_Handle_NOHQ.paa";
+	uvSource="tex";
+	class uvTransform
+	{
+		aside[]={1,0,0};
+		up[]={0,1,0};
+		dir[]={0,0,1};
+		pos[]={0,0,0};
+	};
+};
+class Stage2
+{
+	texture="x\tup\addons\m_bayonet\data\SPRTN_SA80_LQ_Handle_co.paa";
+	uvSource="tex";
+	class uvTransform
+	{
+		aside[]={12,0,0};
+		up[]={0,12,0};
+		dir[]={0,0,12};
+		pos[]={0,0,0};
+	};
+};

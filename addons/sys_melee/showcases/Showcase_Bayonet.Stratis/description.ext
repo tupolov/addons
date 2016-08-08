@@ -1,0 +1,21 @@
+
+author = Tupolov;
+briefingName = Bayonets;
+onLoadName = Bayonet Practice;
+onLoadMission = "You have been given access to all basic weapons and bayonets to try out, the locals don't look keen. Press Melee to prod or just simply try the bayonets for size.";
+loadScreen = "\a3\missions_f\data\img\showcase_infantry_overview_ca.paa";
+
+overviewText = When it comes to building clearance or charging a position, you'll need more than just your rifle. Attach bayonets in the Support Crates with the appropriate rifle. Use Melee to strike.;
+overviewPicture = "\a3\missions_f\data\img\Showcase_Infantry_overview_CA.paa";
+
+enableDebugConsole = 1;
+allowFunctionsRecompile = 1;
+
+diagRadio = 1;
+diagHit = 1;
+diagKey = 1;
+diagAAR = 1;
+
+briefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+debriefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+

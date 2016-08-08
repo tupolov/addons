@@ -1,0 +1,106 @@
+#include "script_component.hpp"
+
+private ["_anim","_height","_currentAnim","_newAction","_newpose","_newD","_array","_action","_pose","_darray","_d","_move","_stan","_hand","_check"];
+
+PARAMS_1(_currentAnim);
+
+_currentAnim = tolower(_currentAnim);
+
+_height = [_currentAnim] call FUNC(canGetInCover);
+
+TRACE_1("",_height);
+
+// Check to see if you can hide behind something, function returns height of object in relation to man
+if (_height == 0) exitwith { hintSilent "Can't get in cover here"};
+if (_height == -1) exitwith { hintSilent "Already in cover."};
+
+// Split the animation string into action, pose, movement, stance, hand class, direction
+_array = [_currentAnim, ""] call cba_fnc_split;
+
+if (_array select 0 != "a") exitWith {hint "You are sitting, get off your ass!"};
+
+// Get current animation state components for action, pose, stance and hand class
+_action = [[(_array select 0),(_array select 1),(_array select 2),(_array select 3)],""] call CBA_fnc_join;
+_pose = [[(_array select 4),(_array select 5),(_array select 6),(_array select 7)],""] call CBA_fnc_join;
+_move = [[(_array select 8),(_array select 9),(_array select 10),(_array select 11)],""] call CBA_fnc_join;
+_stan = [[(_array select 12),(_array select 13),(_array select 14),(_array select 15)],""] call CBA_fnc_join;
+_hand = [[(_array select 16),(_array select 17),(_array select 18),(_array select 19)],""] call CBA_fnc_join;
+
+_d = "";
+_darray = [];
+// Get the Direction state
+for "_x" from 20 to (count _array)-1 do {
+	_d = _d + (_array select _x);
+};
+
+// Get rid of any extras
+_darray = [_d, "_"] call cba_fnc_split;
+
+_d = _darray select 0;
+
+TRACE_4("",_action, _pose, _darray, _d);
+	
+// Switch to equivalent
+switch (true) do {
+	case (_height > 1.7): {hint "Switch to HighStand"; _newAction = "Aadj"; _newpose = "Perc"; _newD = "Dup";};
+	case (_height > 1.6 && _height <= 1.7): {hint "Switch to Stand"; _newAction = "Amov";_newpose = "Perc"; _newD = "Dnon";};
+	case (_height > 1.4 && _height <= 1.6): {hint "Switch to LowStand"; _newAction = "Aadj"; _newpose = "Perc"; _newD = "Ddown";};
+	case (_height > 1.3 && _height <= 1.4): {hint "Switch to HighKneel"; _newAction = "Aadj"; _newpose = "Pknl"; _newD = "Dup";};
+	case (_height > 1.1 && _height <= 1.3): {hint "Switch to Kneel"; _newAction = "Amov"; _newpose = "Pknl"; _newD = "Dnon";};
+	case (_height > 0.8 && _height <= 1.1): {hint "Switch to LowKneel"; _newAction = "Aadj"; _newpose = "Pknl"; _newD = "Ddown";};
+	case (_height > 0.6 && _height <= 0.8): {hint "Switch to HighProne"; _newAction = "Aadj"; _newpose = "Ppne"; _newD = "Dup";};
+	case (_height <= 0.6 && _height > 0.3): {hint "Switch to Prone"; _newAction = "Amov"; _newpose = "Ppne"; _newD = "Dnon";};
+	default {hint "Switch to LowProne"; _newAction = "Aadj"; _newpose = "Ppne"; _newD = "Ddown";};
+};
+
+_anim = _currentAnim;
+// if we are moving to an adjusted stance then set things up properly
+if (_newAction == "Aadj" && _action != "aadj") then {
+	
+	// If the player is being switched to an adjusted stance, they should have the weapon raised
+	if (_stan != "sras") then {
+		_anim = [_anim, _stan, "sras"] call cba_fnc_replace;
+	};
+
+	// If the player is being switched to an adjusted stance and are not holding a rifle or pistol, switch to rifle
+	if (_hand != "wrfl" or _hand != "wpst") then {
+		_weapon = currentWeapon player;
+		_weaponCheck = [configFile >> "CfgWeapons" >> _weapon >> "nameSound", "text", "missing"] call CBA_fnc_getConfigEntry;
+		if (_weaponCheck == "Pistol") then {
+			_anim = [_anim, _hand, "wpst"] call cba_fnc_replace; 
+		} else {
+			_anim = [_anim, _hand, "wrfl"] call cba_fnc_replace; 
+		};
+	};
+};
+	
+// Make sure the new anim is in the stopped
+_anim = [_anim, _move, "Mstp"] call cba_fnc_replace;
+
+// Switch direction
+if (count _darray > 1) then {
+	_d = [[_darray select 0, _darray select 1], "_"] call CBA_fnc_join;
+};
+_anim = [_anim, _d , _newD] call cba_fnc_replace;
+
+// Switch action
+_anim = [_anim, _action, _newAction] call cba_fnc_replace; 
+	
+// switch Pose as appropriate
+_anim = [_anim, _pose, _newpose] call cba_fnc_replace;
+
+// *** get in cover
+
+// *** Visual feedback
+//hint localize "STR_ALIVE_INCOVER";
+
+// Check that new anim is legit
+_check = [configFile >> "CfgMovesMaleSdr" >> "States" >> _anim >> "access", "number", 0] call CBA_fnc_getConfigEntry;
+
+if (_check == 3) then {
+	// Switch to new anim
+	 TRACE_2("Correct Anim",_currentAnim, _anim);
+	player playmove _anim;
+} else {
+	TRACE_2("Incorrect Anim", _currentAnim, _anim);
+};

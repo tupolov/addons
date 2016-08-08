@@ -1,0 +1,21 @@
+
+author = Tupolov;
+briefingName = Advanced Melee;
+onLoadName = Fight Club!;
+onLoadMission = "A group of locals need putting in their place. Press Melee to beat the seven shades out of them. You can hit people with or without a weapon.";
+loadScreen = "\a3\missions_f\data\img\showcase_infantry_overview_ca.paa";
+
+overviewText = Run out of ammo? No weapon? No problem! Work on your unarmed combat skills using this melee feature. Press Melee to either punch or use your weapon to strike an enemy.;
+overviewPicture = "\a3\missions_f\data\img\Showcase_Infantry_overview_CA.paa";
+
+enableDebugConsole = 1;
+allowFunctionsRecompile = 1;
+
+diagRadio = 1;
+diagHit = 1;
+diagKey = 1;
+diagAAR = 1;
+
+briefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+debriefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+

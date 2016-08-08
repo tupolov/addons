@@ -1,0 +1,21 @@
+
+author = Tupolov;
+briefingName = Auto Hide/Cover;
+onLoadName = Early Morning Run!;
+onLoadMission = "Practice getting into cover behind various objects, rucks, crates, fortifications and terrain. Press SHIFT-X to get into cover behind something. Watch out for the OPFOR Sniper!";
+loadScreen = "\a3\missions_f\data\img\showcase_infantry_overview_ca.paa";
+
+overviewText = This mission tests your ability to get into cover. Run down the firing range, ducking into cover, as an OPFOR marksmen practices shooting at you! Nerves of steel and SHIFT-X required!;
+overviewPicture = "\a3\missions_f\data\img\Showcase_Infantry_overview_CA.paa";
+
+enableDebugConsole = 1;
+allowFunctionsRecompile = 1;
+
+diagRadio = 1;
+diagHit = 1;
+diagKey = 1;
+diagAAR = 1;
+
+briefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+debriefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+

@@ -1,0 +1,8 @@
+AK Model,UV - OLAF
+AK UV,Textures - Koster
+
+US Model, Textures - Euan Mitchell, "tigg", 2013
+
+M7 Model, Textures - Squeezit
+
+Royal Marines Bayonet - Spartan, VCB

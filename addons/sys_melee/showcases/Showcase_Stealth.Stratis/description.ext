@@ -1,0 +1,21 @@
+
+author = Tupolov;
+briefingName = Stealth Takedown;
+onLoadName = Stealth Takedown;
+onLoadMission = "Infiltrate an enemy radar installation and takedown the guards. Press SHIFT-SPACE key to strike a killing below. Get as close as you can before hitting them hard and fast.";
+loadScreen = "\a3\missions_f\data\img\showcase_infantry_overview_ca.paa";
+
+overviewText = Infiltrate an enemy radar installation and takedown the guards. Press SHIFT-SPACE key to strike a killing below. Get as close as you can before hitting them hard and fast. Check the map for latest intel on guard positons.;
+overviewPicture = "\a3\missions_f\data\img\Showcase_Infantry_overview_CA.paa";
+
+enableDebugConsole = 1;
+allowFunctionsRecompile = 1;
+
+diagRadio = 1;
+diagHit = 1;
+diagKey = 1;
+diagAAR = 1;
+
+briefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+debriefing = "[1,0] select ([] call (uinamespace getvariable 'bis_fnc_isCampaign'))";
+

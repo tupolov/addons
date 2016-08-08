@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project name="Arma3">
+<Package name="ALIVE">
+<Container name="STR_DN">
+<Key ID="STR_ALIVE_INCOVER">
+<English>In Cover!</English>
+<German>Im Deckel!</German>
+<Russian>в обложке!</Russian>
+<French>En couverture!</French>
+<Spanish>En portada!</Spanish>
+<Czech>V krytu!</Czech>
+<Italian>In copertina!</Italian>
+<Hungarian>A borító!</Hungarian>
+<Polish>Na okładce!</Polish>
+</Key>
+</Container>
+</Package>
+</Project>
